@@ -5,7 +5,8 @@ def testPut():
 
     event = {
         "httpMethod": "POST",
-        "body": "{\"response\": \"React\"}"
+        "body": "{\"response\": \"Southerners\"}",
+        "headers": "{\"origin\": \"http://localhost:3000\"}"
     }
 
     output = lambda_function.lambda_handler(event, None)
@@ -14,7 +15,8 @@ def testPut():
     print("[INFO] Test Put Success", output["body"])
 def testGet():
     event = {
-        "httpMethod": "GET"
+        "httpMethod": "GET",
+        "headers": "{\"origin\": \"http://localhost:3000\"}"
     }
 
     output = lambda_function.lambda_handler(event, None)

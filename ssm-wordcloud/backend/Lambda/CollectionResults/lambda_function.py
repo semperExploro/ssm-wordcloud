@@ -60,15 +60,18 @@ def lambda_handler(event, context):
             body = json.loads(body)
 
         response_name = body["response"]
+        similarityReached = False
         for entry in contents:
             word = entry[0]
             count = entry[1]
 
             similarity = cosineSimilarityBetweenTwoWords(response_name, word)
+            print("[INFO] - Similarity", similarity, word, response_name)
             if similarity > 0.9:
                 entry[1] = count + 1
-            else:
-                contents.append([response_name, 1])
+                similarityReached = True
+        if similarityReached == False:
+            contents.append([response_name, 1])
 
         ###########################
         # Update the file
