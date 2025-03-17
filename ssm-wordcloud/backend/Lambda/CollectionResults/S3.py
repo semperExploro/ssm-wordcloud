@@ -18,7 +18,6 @@ class S3_Bucket:
 
         self.bucket_name = bucket_name
         self.s3_client = boto3.client('s3')
-        self.dynamodb = boto3.resource('dynamodb')
 
     
     def getPresignedURLWrite(self,object_name: str, time_limit = PRESIGNED_DEFAULT) -> None: 
@@ -39,6 +38,7 @@ class S3_Bucket:
 
             return generatedURl
         except Exception as e: 
+            print("[INFO] Error in getting presigned url for write", e)
             raise Exception("Error in getting presigned url for write")
 
     def getPresignedURLRead(self,object_name:str,time_limit = PRESIGNED_DEFAULT) -> None:
@@ -58,6 +58,7 @@ class S3_Bucket:
             )
             return generatedPresigned
         except Exception as e: 
+            print("[INFO] Error in getting presigned url for read", e)
             raise Exception("Error in getting presigned url for read")
 
     def deleteObject(self,object_name:str) -> None:
@@ -256,6 +257,7 @@ class S3_Bucket:
             )
             return response["Body"].read()
         except Exception as e: 
+            print("[INFO] Error in getting contents of file", e)
             raise Exception("Error in getting contents of file")
         
     def deleteWithPrefix(self, searchPrefix):
