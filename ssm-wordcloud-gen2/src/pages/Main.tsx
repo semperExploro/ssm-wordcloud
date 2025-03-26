@@ -43,13 +43,14 @@ function InputBox(showInput: boolean, APIGatewayManager: APIGateway) {
         if (!userInput.trim()) {
             console.warn("[WARN] Empty input, submission aborted.");
             return;
+        } else {
+            setButtonText("Loading");
+            setSpinnerVisible(<i class="fa fa-spinner fa-spin"></i>);
         }
 
         console.log("[INFO] User Input:", userInput);
         APIGatewayManager.putResponse(userInput).then((response) => {
             console.log("[INFO] Response:", response);
-            setButtonText("Loading");
-            setSpinnerVisible(<i class="fa fa-spinner fa-spin"></i>);
             window.location.href = "/WordCloud";
         }).catch((error) => {
             console.error("[ERROR] Error submitting response:", error);
