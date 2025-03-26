@@ -41,19 +41,20 @@ const WordCloudCanvas = () => {
       WordCloud(canvasRef.current, {
         list: words,
         gridSize: 8,
-        weightFactor: 15, // Increased weight factor for larger font size
+        weightFactor: 12, // Increased weight factor for larger font size
         fontFamily: "sans-serif",
-        color: () => `hsl(${Math.random() * 360}, 100%, 50%)`,
-        rotateRatio: 0.5,
+        color: () => `hsl(${Math.random() * 360}, 60%, 40%)`,
+        rotateRatio: 0,
         rotationSteps: 2,
-        backgroundColor: "#ffffff",
+        backgroundColor: "floralwhite",
+        padding: "10rem"
       });
     }
   }, [isClient, words]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-white">
-      {isClient && <canvas ref={canvasRef} width={600} height={600} />}
+      {isClient && <canvas ref={canvasRef} width={500} height={500} />}
     </div>
   );
 };
